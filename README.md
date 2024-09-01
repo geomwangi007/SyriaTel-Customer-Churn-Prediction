@@ -110,13 +110,77 @@ Numerical features were normalized using `MinMaxScaler` to ensure that they were
 
 ![alt text](image.png)
 
+Total Calls Distribution by Churn Status
+
+![alt text](image-1.png)
+
+Conclusion
+
+**Non-Churned Users:**
+
+The distribution of total calls for users who did not churn (churn = False) is symmetric and follows a normal distribution centered around 300 calls.
+
+The spread of calls is quite wide, ranging from about 200 to 400 calls.
+
+**Churned Users:**
+
+For users who churned (churn = True), the distribution is also symmetric but with a lower center around 250 calls.
+
+The distribution is narrower, suggesting that churned users tend to have fewer total calls compared to non-churned users.
+
+International plan vs churn
+
+![alt text](image-2.png)
+
+Conclusion :
+
+Customers without an international plan are much more likely to stay (not churn) compared to those with an international plan. Additionally, the proportion of customers who churn is relatively higher among those with an international plan compared to those without one.
+
+Features Correlations with Churn
+
+![alt text](image-3.png)
+
+Distribution of Area Code Feature
+
+![alt text](image-4.png)
+
+* Half of the customers have the area code 415. 
+* One fourth of customers have the area code 510 and another fourth have the area code 408.
+
+Correlation Heatmap for Numeric Features
+
+![alt text](image-5.png)
+
+**Positive Correlations**: Features like customer service calls, total day minutes, and total day charge show a positive correlation with churn, indicating that higher usage in these areas is associated with a higher likelihood of customer churn.
+
+**Negative Correlations**: Features such as number vmail messages and total intl calls show a negative correlation with churn, suggesting that higher usage in these areas might reduce the likelihood of churn.
+
+**Weak or Negligible Correlations**: Several features like total night calls and account length have little to no correlation with churn, indicating minimal influence on the likelihood of a customer churning.
 
 
 ### Insights
+Average Values of Numerical Features for Churned Users
 
-- **Age and Tenure**: Older customers and those with longer tenure showed different churn rates.
-- **Service Usage**: Features like `OnlineSecurity`, `TechSupport`, and `Contract` type were significant in determining churn.
-- **Payment Method**: Certain payment methods showed higher churn rates.
+The following table represents the average (mean) values of numerical features for users who have churned:
+
+- **Account Length**: The average length of time that churned users had their accounts is about **102.66** days.
+- **Area Code**: The average area code for churned users is **437.82**. (Note: Area codes are categorical, so this value is less meaningful).
+- **Number of Voicemail Messages**: On average, churned users had about **5.12** voicemail messages.
+- **Total Day Minutes**: Churned users spent an average of **206.91** minutes on daytime calls.
+- **Total Day Calls**: The average number of daytime calls made by churned users is **101.34**.
+- **Total Day Charge**: Churned users were charged an average of **$35.18** for daytime calls.
+- **Total Evening Minutes**: On average, churned users spent **212.41** minutes on evening calls.
+- **Total Evening Calls**: The average number of evening calls made by churned users is **100.56**.
+- **Total Evening Charge**: Churned users were charged an average of **$18.05** for evening calls.
+- **Total Night Minutes**: The average night minutes for churned users is **205.23** minutes.
+- **Total Night Calls**: Churned users made an average of **100.40** night calls.
+- **Total Night Charge**: Churned users were charged an average of **$9.24** for night calls.
+- **Total International Minutes**: Churned users spent an average of **10.70** minutes on international calls.
+- **Total International Calls**: The average number of international calls made by churned users is **4.16**.
+- **Total International Charge**: Churned users were charged an average of **$2.89** for international calls.
+- **Customer Service Calls**: On average, churned users made **2.23** calls to customer service.
+
+This summary provides insight into the usage patterns and characteristics of customers who decided to leave the service.
 
 ## Feature Engineering
 
