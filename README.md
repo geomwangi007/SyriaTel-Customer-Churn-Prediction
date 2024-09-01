@@ -1,25 +1,98 @@
-# Telecom Customer Churn Prediction
+# SyriaTel Customer Churn Prediction
 
 ## Overview
 
-This project focuses on predicting customer churn using various machine-learning techniques. The analysis involves data preprocessing, exploratory data analysis (EDA), feature engineering, model selection, hyperparameter tuning, and interpretability using SHAP values.
+Customer churn, where customers stop using Syriatel's services, is a significant issue, with the telecom industry facing average churn rates between 30% to 35%. Retaining existing customers is more cost-effective than acquiring new ones, making churn prediction crucial for sustaining business growth. This project aims to equip Syriatel with a robust predictive model to identify high-risk customers and tailor retention strategies accordingly.
 
-**Author**: Ali Amini
+Stakeholders:
+
+Syriatel Management: To strategize and implement customer retention programs.
+
+Customer Service Teams: To identify and engage with high-risk customers effectively.
+
+Data Analysts: To continuously monitor and refine the model for better accuracy.
+
+**Author**: Geoffrey Mwangi
 
 ## Dataset Overview
 
-### Dataset Summary
+### Data Understanding
 
-- **Number of Features**: 31
-- **Types of Features**:
-  - **Numerical**: `age`, `tenure`, `MonthlyCharges`, `TotalCharges`, `DataUsage`, `VoiceCalls`, `SMSCount`, `AverageChargesPerMonth`
-  - **Categorical**: `gender`, `SeniorCitizen`, `Partner`, `Dependents`, `PhoneService`, `MultipleLines`, `InternetService`, `OnlineSecurity`, `OnlineBackup`, `DeviceProtection`, `TechSupport`, `StreamingTV`, `StreamingMovies`, `Contract`, `PaperlessBilling`, `PaymentMethod`
+The dataset utilized in this project originates from Syriatel, containing detailed information about the company's customers. Each record corresponds to a unique customer, with attributes that provide insights into their interaction with Syriatel's services. These attributes include demographic information, service usage patterns, and customer engagement metrics, all of which are crucial for understanding and predicting customer churn.
+
+**Data Source and Suitability:**
+The dataset is well-suited for the objective of predicting customer churn, as it includes both behavioral and service-related features that are likely to influence a customer's decision to terminate their contract. By analyzing these features, the model can identify patterns and correlations that contribute to churn, enabling targeted retention strategies.
+
+**Dataset Size and Descriptive Statistics:**
+- The dataset includes 3333 rows and 21 columns, representing a substantial amount of data for robust analysis.
+- **Key Features and Descriptive Statistics:**
+  - **State:** The state where the customer resides. This categorical variable can help identify geographic patterns in churn.
+  - **Account Length:** The number of days the customer has had this account. Longer account durations might correlate with customer loyalty.
+  - **Area Code:** The area code associated with the customer's phone number. This categorical variable could influence service usage patterns.
+  - **Phone Number:** The customer's phone number. This feature is excluded from the analysis as it is not relevant for predicting churn.
+  - **International Plan:** Indicates whether the customer has subscribed to an international calling plan (binary: True/False). This feature might impact customer satisfaction and churn rates.
+  - **Voice Mail Plan:** Indicates whether the customer has subscribed to a voicemail plan (binary: True/False). This feature could also influence customer satisfaction and churn.
+  - **Number Vmail Messages:** The number of voicemail messages the customer has received. This numerical variable might indicate how much the customer relies on voicemail services.
+  - **Total Day Minutes:** The total number of minutes the customer has spent on calls during the day. Higher usage could be an indicator of engagement with the service.
+  - **Total Day Calls:** The total number of calls the customer has made during the day. This metric, like total day minutes, provides insight into customer engagement.
+  - **Total Day Charge:** The total charges incurred by the customer for daytime calls. This feature is directly related to revenue and could affect satisfaction.
+  - **Total Eve Minutes:** The total number of minutes the customer has spent on calls during the evening. Evening usage patterns might differ from daytime patterns and affect churn.
+  - **Total Eve Calls:** The total number of calls the customer has made during the evening. Like total eve minutes, this provides additional insight into customer behavior.
+  - **Total Eve Charge:** The total charges incurred by the customer for evening calls. This feature, like total day charge, is related to revenue and customer satisfaction.
+  - **Total Night Minutes:** The total number of minutes the customer has spent on calls during the night. Nighttime usage might reflect different customer needs or behaviors.
+  - **Total Night Calls:** The total number of calls the customer has made during the night. This metric, together with total night minutes, provides a complete picture of the customer’s usage patterns.
+  - **Total Night Charge:** The total charges incurred by the customer for nighttime calls. This is another revenue-related feature that could influence satisfaction and churn.
+  - **Total Intl Minutes:** The total number of minutes the customer has spent on international calls. This metric could be particularly relevant for customers with an international plan.
+  - **Total Intl Calls:** The total number of international calls the customer has made. This could indicate how valuable the international plan is to the customer.
+  - **Total Intl Charge:** The total charges incurred by the customer for international calls. This feature might significantly influence churn, especially for international callers.
+  - **Customer Service Calls:** The number of times the customer has called customer service. High values might indicate dissatisfaction and be a strong predictor of churn.
+  - **Churn:** The target variable, indicating whether the customer has terminated the contract (binary: True/False).
+
+**Feature Relevance:**
+Each feature included in the dataset has been selected based on its potential relevance to customer churn. For instance, service usage patterns (e.g., total minutes and charges) and customer service interactions are directly linked to customer satisfaction, which is a strong predictor of churn. The inclusion of these features allows the model to capture a comprehensive view of customer behavior.
+
+**Data Limitations:**
+- **Lack of Demographic Data:** While the dataset includes the state and area code, more granular demographic data such as age, income, or occupation could provide deeper insights into churn behavior.
+- **Potential Class Imbalance:** The dataset may have an imbalance between the number of churned and non-churned customers, which could impact model performance and necessitate techniques like SMOTE (Synthetic Minority Over-sampling Technique).
+- **Temporal Aspects:** The dataset does not include time-based variables that could reveal trends or shifts in customer behavior over time, limiting the ability to detect seasonality or changes in churn patterns.
+
+These limitations, while significant, do not outweigh the strengths of the dataset. The comprehensive nature of the included features still provides a solid foundation for building effective predictive models aimed at reducing customer churn for Syriatel.
 
 ## Data Preprocessing
 
-### Handling Missing Values
+Data Cleaning
 
-The dataset was checked for missing values, and appropriate actions were taken to handle them. Missing values in the `TotalCharges` column were imputed using the median.
+In this section, we prepare the data for exploratory data analysis (EDA) and modeling. The following checks are performed:
+
+- **Duplicated Rows**: Identifying and removing any duplicate entries.
+- **Missing Values**: Detecting and addressing any gaps in the data.
+- **Irrelevant Columns**: Removing columns that do not contribute to the analysis.
+
+### Feature Types
+
+* This step seperates all of the useful features in the dataset so that they can be analyzed accordingly ahead of modeling.  
+
+#### Continuous Features:
+* account length
+* number vmail messages
+* total day minutes
+* total day calls
+* total day charge
+* total eve minutes
+* total eve calls
+* total eve charge
+* total night minutes 
+* total night calls
+* total night charge
+* total intl minutes
+* total intl charge
+* customer service calls
+
+#### Categorical Features:
+* state
+* area code
+* international plan
+* voicemail plan
 
 ### Encoding Categorical Features
 
@@ -33,10 +106,11 @@ Numerical features were normalized using `MinMaxScaler` to ensure that they were
 
 ### Visualizations
 
-- **Histograms**: Distribution of numerical features.
-- **Box Plots**: Comparison of numerical features across churned and non-churned customers.
-- **Count Plots**: Distribution of categorical features.
-- **Bar Plots**: Proportion of churn within each category of the categorical features.
+### Churn vs Did not Churn representation
+
+![alt text](image.png)
+
+
 
 ### Insights
 
@@ -46,109 +120,29 @@ Numerical features were normalized using `MinMaxScaler` to ensure that they were
 
 ## Feature Engineering
 
-Several new features were engineered to capture more complex relationships:
-
-- **Tenure Group**: Categorized customers based on their tenure.
-- **Monthly Charges Bin**: Binned monthly charges into intervals.
-- **Total Charges to Tenure**: Ratio of total charges to tenure.
-- **Number of Services Subscribed**: Count of services a customer is subscribed to.
-- **Payment Method Encoding**: One-hot encoded different payment methods.
 
 ## Model Selection
 
-Four different models were trained and evaluated:
 
-1. **Support Vector Machine (Linear Kernel)**
-2. **K-Nearest Neighbors (KNN)**
-3. **Linear Discriminant Analysis (LDA)**
-4. **XGBoost**
 
 ### Training Set Results
 
-| Model                         | Accuracy | Precision | Recall | F1 Score |
-|-------------------------------|----------|-----------|--------|----------|
-| Support Vector Machine (Linear)| 0.5757   | 0.5824    | 0.5775 | 0.5799   |
-| K-Nearest Neighbors            | 0.6500   | 0.6528    | 0.6620 | 0.6573   |
-| Linear Discriminant Analysis   | 0.5700   | 0.5726    | 0.6000 | 0.5860   |
-| XGBoost                        | 1.0000   | 1.0000    | 1.0000 | 1.0000   |
 
-**Conclusion**: XGBoost was selected as the best-performing model due to its ability to handle the complexity of the dataset and its superior performance metrics.
 
-## Hyperparameter Tuning and Model Evaluation
+**Conclusion**: 
 
-### Hyperparameter Tuning
-
-Hyperparameters for XGBoost were optimized using `RandomizedSearchCV`. The following hyperparameters were selected:
-
-- **alpha**: 0.5266
-- **colsample_bylevel**: 0.9004
-- **colsample_bynode**: 0.9895
-- **colsample_bytree**: 0.9199
-- **gamma**: 4.3350
-- **lambda**: 1.8159
-- **learning_rate**: 0.1755
-- **max_depth**: 5
-- **min_child_weight**: 8
-- **n_estimators**: 492
-- **scale_pos_weight**: 5.1551
-- **subsample**: 0.7975
-
-### Test Set Results
-
-The model was evaluated on the test set with the following results:
-
-- **Accuracy**: 0.5200
-- **Precision**: 0.5140
-- **Recall**: 0.9671
-- **F1 Score**: 0.6712
-
-**Analysis**: The model exhibits high recall, indicating it is effective at identifying churners, but at the cost of precision, leading to many false positives.
 
 ## Feature Importance
 
-Feature importance was evaluated using XGBoost's built-in feature importance scores.
 
-### Top Features
 
-- **OnlineBackup_Yes**
-- **Dependents_Yes**
-- **TechSupport_Yes**
-- **PhoneService_Yes**
-- **DeviceProtection_Yes**
-
-**Interpretation**: Features related to customer dependencies and service support are the most influential in predicting churn.
-
-## SHAP Analysis
-
-SHAP (SHapley Additive exPlanations) was used to interpret the XGBoost model:
-
-- **Summary Plot**: Showed the impact of each feature on model output.
-- **Dependence Plot**: Illustrated the relationship between the most important feature and churn prediction.
-
-**Conclusion**: SHAP provided insights into how specific features contributed to the likelihood of churn, enhancing the interpretability of the model.
 
 ## Conclusion and Recommendations
 
 ### Business Implications
 
-- **Targeted Retention Strategies**: The model identifies key features that contribute significantly to customer churn, such as `OnlineBackup`, `Dependents`, and `TechSupport`. These insights can be leveraged to develop targeted retention strategies. For example, customers who are not using `TechSupport` or `OnlineBackup` might be more likely to churn, suggesting that promotions or educational campaigns focused on these services could help in reducing churn rates.
-
-- **Service Improvements**: The analysis highlights that services such as `TechSupport` and `OnlineBackup` have a strong influence on whether a customer will churn. Investing in improving these services and ensuring they are effectively marketed to customers could lead to higher customer satisfaction and lower churn rates.
-
-- **Customer Segmentation**: By understanding the different factors that drive churn among various customer segments (e.g., those with `Dependents`, those using `MultipleLines`), the company can develop more personalized marketing and service strategies. This segmentation can help in allocating resources more efficiently, targeting the right customers with the right offers.
-
-- **Proactive Measures**: The high recall rate of the model suggests that it is particularly effective at identifying customers who are at risk of churning. This allows the business to take proactive measures to retain these customers, such as offering discounts, enhancing service levels, or engaging with them more personally to address any concerns.
 
 ### Future Work
 
-- **Additional Features**: Incorporate customer satisfaction scores, competitor analysis, and social media sentiment to further enhance the model’s accuracy and the insights derived from it.
-- **Advanced Models**: Explore deep learning models and ensemble techniques for potentially better performance.
-- **Real-Time Predictions**: Implement the model in a real-time environment to provide actionable insights for customer retention efforts.
-
-### Deployment Considerations
-
-- **Monitoring**: Regularly monitor the model's performance to ensure it continues to perform well over time.
-- **Updating**: Periodically retrain the model with new data to capture evolving customer behaviors.
-- **Integration**: Deploy the model within customer management systems for real-time churn prediction.
 
 
