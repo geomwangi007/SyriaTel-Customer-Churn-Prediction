@@ -288,18 +288,88 @@ weighted avg   0.889698  0.784173  0.819634  834.000000
 
 **Conclusion**: 
 
+# Summary of the Results
 
-## Feature Importance
+## 1. Decision Tree - No Scaling, No SMOTE
+- **Accuracy**: 94.36%
+- **Precision**: 71.43%
+- **Recall**: 78.65%
+- **Analysis**: 
+  - This model achieved the highest accuracy with a good balance between precision and recall.
+  - It effectively predicts churn without needing any preprocessing.
+  - However, it may favor the majority class (non-churners), which can lead to fewer detected churn cases.
 
+## 2. Logistic Regression - With Scaling, No SMOTE
+- **Accuracy**: 90.77%
+- **Precision**: 71.43%
+- **Recall**: 22.47%
+- **Analysis**:
+  - This model shows high accuracy and excellent precision but suffers from low recall.
+  - It misses many potential churners, making it less suitable for identifying at-risk customers.
 
+## 3. Decision Tree - No Scaling, With SMOTE
+- **Accuracy**: 88.73%
+- **Precision**: 48.32%
+- **Recall**: 80.90%
+- **Analysis**:
+  - Improved recall at the cost of lower precision.
+  - This model is better at catching more churners, even if it introduces more false positives.
+  - Suitable for broad retention strategies where catching all possible churners is crucial.
 
+## 4. Logistic Regression - With Scaling, With SMOTE
+- **Accuracy**: 90.41%
+- **Precision**: 57.38%
+- **Recall**: 39.33%
+- **Analysis**:
+  - Offers a balanced performance with decent overall accuracy.
+  - This model provides a middle ground between precision and recall.
 
-## Conclusion and Recommendations
+## 5. Decision Tree - Reduced Features, With SMOTE
+- **Accuracy**: 85.25%
+- **Precision**: 40.23%
+- **Recall**: 78.65%
+- **Analysis**:
+  - Moderate accuracy with high recall.
+  - The reduced feature set simplifies the model but slightly reduces its effectiveness.
+
+## 6. Logistic Regression - Reduced Features, With SMOTE
+- **Accuracy**: 78.42%
+- **Precision**: 29.41%
+- **Recall**: 73.03%
+- **Analysis**:
+  - This model has the lowest performance, with lower precision and recall.
+  - It is less effective for practical use compared to the other models.
+
+## Conclusion and Final Model Selection
+
+**Selected Model**: **Decision Tree - No Scaling, With SMOTE**
+
+### Justification:
+- **High Recall**: 
+  - The selected model’s recall of 80.90% is crucial for identifying customers at risk of churn, aligning with the primary business goal.
+- **Cost of False Positives vs. False Negatives**: 
+  - Although precision is lower, the cost of false positives (offering incentives to customers who may not churn) might be lower than the cost of false negatives (missing customers who do churn).
+- **Balanced Performance**:
+  - The model’s balanced accuracy and F1 score make it an optimal choice.
 
 ### Business Implications
 
+- **High Recall**: 
+  - The model effectively identifies a majority of high-risk customers, allowing Syriatel to take preemptive action to retain them.
+- **SMOTE Usefulness**: 
+  - The application of SMOTE improves the model’s ability to detect churn by oversampling the minority class (churners).
+- **Feature Importance**: 
+  - The use of all features without reduction yields better predictive performance, implying that every bit of customer information contributes to understanding churn risk.
 
-### Future Work
+### Future Work:
+This model can be used to develop targeted retention strategies, such as personalized offers or customer engagement programs, to minimize churn and maximize customer loyalty.
+
+
+
+
+
+
+
 
 
 
