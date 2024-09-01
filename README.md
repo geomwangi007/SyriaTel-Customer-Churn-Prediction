@@ -190,89 +190,18 @@ By selecting the most important features, we reduce the dimensionality of the da
 ## Evaluating and Comparing the different  Models
 
 
-Decision Tree - No Scaling, No SMOTE:
-Confusion Matrix:
-[[717  28]
- [ 19  70]]
+# Model Performance Comparison
 
-Classification Report:
-              precision    recall  f1-score     support
-0              0.974185  0.962416  0.968265  745.000000
-1              0.714286  0.786517  0.748663   89.000000
-accuracy       0.943645  0.943645  0.943645    0.943645
-macro avg      0.844235  0.874466  0.858464  834.000000
-weighted avg   0.946450  0.943645  0.944830  834.000000
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*-
+| Model                                    | Confusion Matrix              | Precision (Class 0) | Recall (Class 0) | F1-Score (Class 0) | Precision (Class 1) | Recall (Class 1) | F1-Score (Class 1) | Accuracy | Macro Avg F1 | Weighted Avg F1 |
+|------------------------------------------|-------------------------------|---------------------|------------------|--------------------|---------------------|------------------|--------------------|----------|--------------|-----------------|
+| **Decision Tree - No Scaling, No SMOTE** | `[[717, 28], [19, 70]]`       | 0.974               | 0.962            | 0.968              | 0.714               | 0.787            | 0.749              | 0.944    | 0.858        | 0.945           |
+| **Logistic Regression - With Scaling, No SMOTE** | `[[737, 8], [69, 20]]` | 0.914               | 0.989            | 0.950              | 0.714               | 0.225            | 0.342              | 0.908    | 0.646        | 0.885           |
+| **Decision Tree - No Scaling, With SMOTE** | `[[668, 77], [17, 72]]` | 0.975               | 0.897            | 0.934              | 0.483               | 0.809            | 0.605              | 0.887    | 0.770        | 0.899           |
+| **Logistic Regression - With Scaling, With SMOTE** | `[[719, 26], [54, 35]]` | 0.930               | 0.965            | 0.947              | 0.574               | 0.393            | 0.467              | 0.904    | 0.707        | 0.896           |
+| **Decision Tree - Reduced Features, With SMOTE** | `[[641, 104], [19, 70]]` | 0.971               | 0.860            | 0.912              | 0.402               | 0.787            | 0.532              | 0.853    | 0.722        | 0.872           |
+| **Logistic Regression - Reduced Features, With SMOTE** | `[[589, 156], [24, 65]]` | 0.961               | 0.791            | 0.867              | 0.294               | 0.730            | 0.419              | 0.784    | 0.643        | 0.820           |
 
-Logistic Regression - With Scaling, No SMOTE:
-Confusion Matrix:
-[[737   8]
- [ 69  20]]
 
-Classification Report:
-              precision    recall  f1-score     support
-0              0.914392  0.989262  0.950355  745.000000
-1              0.714286  0.224719  0.341880   89.000000
-accuracy       0.907674  0.907674  0.907674    0.907674
-macro avg      0.814339  0.606990  0.646117  834.000000
-weighted avg   0.893038  0.907674  0.885422  834.000000
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*-
-
-Decision Tree - No Scaling, With SMOTE:
-Confusion Matrix:
-[[668  77]
- [ 17  72]]
-
-Classification Report:
-              precision    recall  f1-score    support
-0              0.975182  0.896644  0.934266  745.00000
-1              0.483221  0.808989  0.605042   89.00000
-accuracy       0.887290  0.887290  0.887290    0.88729
-macro avg      0.729202  0.852817  0.769654  834.00000
-weighted avg   0.922683  0.887290  0.899133  834.00000
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*-
-
-Logistic Regression - With Scaling, With SMOTE:
-Confusion Matrix:
-[[719  26]
- [ 54  35]]
-
-Classification Report:
-              precision    recall  f1-score     support
-0              0.930142  0.965101  0.947299  745.000000
-1              0.573770  0.393258  0.466667   89.000000
-accuracy       0.904077  0.904077  0.904077    0.904077
-macro avg      0.751956  0.679180  0.706983  834.000000
-weighted avg   0.892112  0.904077  0.896009  834.000000
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*-
-
-Decision Tree - Reduced Features, With SMOTE:
-Confusion Matrix:
-[[641 104]
- [ 19  70]]
-
-Classification Report:
-              precision    recall  f1-score     support
-0              0.971212  0.860403  0.912456  745.000000
-1              0.402299  0.786517  0.532319   89.000000
-accuracy       0.852518  0.852518  0.852518    0.852518
-macro avg      0.686755  0.823460  0.722387  834.000000
-weighted avg   0.910501  0.852518  0.871889  834.000000
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*-
-
-Logistic Regression - Reduced Features, With SMOTE:
-Confusion Matrix:
-[[589 156]
- [ 24  65]]
-
-Classification Report:
-              precision    recall  f1-score     support
-0              0.960848  0.790604  0.867452  745.000000
-1              0.294118  0.730337  0.419355   89.000000
-accuracy       0.784173  0.784173  0.784173    0.784173
-macro avg      0.627483  0.760471  0.643403  834.000000
-weighted avg   0.889698  0.784173  0.819634  834.000000
--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*-
 
 
 ### Comparison of ROC Curves for Different Models
