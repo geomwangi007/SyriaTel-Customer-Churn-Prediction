@@ -96,11 +96,11 @@ In this section, we prepare the data for exploratory data analysis (EDA) and mod
 
 ### Encoding Categorical Features
 
-Categorical features were encoded using `LabelEncoder` and `OneHotEncoder` to convert them into a format suitable for machine learning models. This step was crucial for ensuring that the categorical data could be effectively used in the models.
+Categorical features were encoded using `OneHotEncoder` to convert them into a format suitable for machine learning models. This step was crucial for ensuring that the categorical data could be effectively used in the models.
 
 ### Data Normalization
 
-Numerical features were normalized using `MinMaxScaler` to ensure that they were on the same scale, which is particularly important for models like SVM and K-Nearest Neighbors.
+Numerical features were normalized using `MinMaxScaler` to ensure that they were on the same scale, which is particularly important for models like Logistic regression.
 
 ## Exploratory Data Analysis (EDA)
 
